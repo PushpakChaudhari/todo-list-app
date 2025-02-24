@@ -63,7 +63,8 @@ const HomePage = () => {
       </div>
 
       {/* Input Field and Button */}
-    <div className="w-full max-w-screen-lg px-3 mb-8 absolute left-1/2 transform -translate-x-1/2 top-44">
+      <div className="w-full max-w-screen-lg px-3 mb-8 relative -mt-6">
+
     <TodoForm onAdd={addTodo} />
   </div>
 

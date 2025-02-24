@@ -66,7 +66,7 @@ const TodoItem = ({ todo, onToggle, onDelete, onEdit }) => {
 
       {/* Delete Confirmation Modal */}
       {showDeleteConfirm && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-md w-80 text-center">
             <h2 className="text-lg font-semibold">Are you sure?</h2>
             <p className="text-sm text-gray-600 mt-2">
