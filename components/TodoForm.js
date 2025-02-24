@@ -25,8 +25,8 @@ const TodoForm = ({ onAdd }) => {
         type="submit"
         className="px-4 py-3 bg-[#033487] hover:bg-blue-800 text-white rounded-lg flex items-center gap-2 shadow-md transition duration-200 ml-2"
       >
-        <span className="w-6 h-6 flex items-center justify-center border border-white rounded-full">
-          <Plus size={14} />
+         <span className="w-6 h-6 flex items-center justify-center ">
+          <img src="/images/plus.png" alt="Add Task" className="w-5 h-5" />
         </span>
         Add Task
       </button>
