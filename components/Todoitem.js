@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 const TodoItem = ({ todo, onToggle, onDelete, onEdit }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const menuRef = useRef(null);
 
   const handleMenuClick = () => {
     setShowMenu(!showMenu);
@@ -23,6 +24,23 @@ const TodoItem = ({ todo, onToggle, onDelete, onEdit }) => {
     setShowDeleteConfirm(false);
   };
 
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setShowMenu(false);
+      }
+    };
+
+    if (showMenu) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [showMenu]);
+
   return (
     <>
       {/* Todo Item */}
@@ -38,7 +56,7 @@ const TodoItem = ({ todo, onToggle, onDelete, onEdit }) => {
             {todo.text}
           </span>
         </div>
-        <div className="relative">
+        <div className="relative" ref={menuRef}>
           <button
             onClick={handleMenuClick}
             className="px-2 py-1 text-gray-600 focus:outline-none bg-gray-100"
@@ -74,19 +92,18 @@ const TodoItem = ({ todo, onToggle, onDelete, onEdit }) => {
               <span className="font-bold">"{todo.text}"</span>?
             </p>
             <div className="flex justify-center mt-4">
-            <button
+              <button
                 onClick={confirmDelete}
-                className="px-4 py-2  text-gray-700 bg-[#EBEFF6]  rounded-lg mr-2"
+                className="px-4 py-2 text-gray-700 bg-[#EBEFF6] rounded-lg mr-2"
               >
                 Yes, Delete
               </button>
               <button
                 onClick={() => setShowDeleteConfirm(false)}
-                className="px-4 py-2 text-white bg-[#033487] rounded-lg "
+                className="px-4 py-2 text-white bg-[#033487] rounded-lg"
               >
                 Cancel
               </button>
-             
             </div>
           </div>
         </div>
